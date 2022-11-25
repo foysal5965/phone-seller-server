@@ -25,6 +25,7 @@ async function run(){
    
     try{
         const categoryCollection= client.db('full-stack-project-1').collection('Category');
+        const bookingsCollection= client.db('full-stack-project-1').collection('bookings');
         const categoryDetailsCollection = client.db('full-stack-project-1').collection('Category-details')
         app.get('/category', async(req,res)=>{
             const query= {};
@@ -38,6 +39,17 @@ async function run(){
         const result= await categoryDetailsCollection.find(query).toArray()
         console.log(result)
         res.send(result)
+      })
+      app.post('/orders', async(req,res)=>{
+        const bookings= req.body;
+        const result= await bookingsCollection.insertOne(bookings)
+        res.send(result)
+      })
+      app.get('/orders', async(req,res)=>{
+        const email= req.query.email;
+        const query={email:email}
+        const bookings= await bookingsCollection.find(query).toArray()
+        res.send(bookings)
       })
     }
     finally{        
