@@ -149,12 +149,7 @@ async function run() {
       const result = await usersCollection.deleteOne(filter)
       res.send(result)
     })
-    app.post('/advertisedproducts', async (req, res) => {
-      const advertised = req.body
-
-      const result = await advertisedProductColletion.insertOne(advertised)
-      res.send(result)
-    })
+    
     app.get('/advertisedproducts', async (req, res) => {
       const query = {};
       const result = await advertisedProductColletion.find(query).toArray();
@@ -187,6 +182,14 @@ async function run() {
       const result= await paymentsColletion.insertOne(payment)
       res.send(result)
     })
+    app.post('/advertisedproducts', async (req, res) => {
+      const advertised = req.body
+
+      const result = await advertisedProductColletion.insertOne(advertised)
+      res.send(result)
+    })
+    
+   
   }
   finally {
 
