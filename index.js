@@ -178,15 +178,24 @@ async function run() {
       const updatedDoc={
         $set:{paid:true}
       }
+      const bookimgUpdate= await categoryDetailsCollection.updateOne(filter,updatedDoc)
       const updatedReslt= await bookingsCollection.updateOne(filter,updatedDoc)
       const result= await paymentsColletion.insertOne(payment)
       res.send(result)
     })
     app.post('/advertisedproducts', async (req, res) => {
       const advertised = req.body
-
+      
       const result = await advertisedProductColletion.insertOne(advertised)
       res.send(result)
+    })
+    app.put('/advertisedproducts/:id', async(req,res)=>{
+      const id= req.params.id;
+      const filter={_id:ObjectId(id)}
+      const updateAdvertise= req.body.update
+      console.log(updateAdvertise)
+      const updatedReslt= await advertisedProductColletion.updateOne(filter,updateAdvertise)
+      res.send(updatedReslt)
     })
     
    
