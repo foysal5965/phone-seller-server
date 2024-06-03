@@ -42,6 +42,7 @@ function verifyJWT(req, res, next) {
 async function run() {
 
   try {
+    //data
     const categoryCollection = client.db('full-stack-project-1').collection('Category');
     const bookingsCollection = client.db('full-stack-project-1').collection('bookings');
     const categoryDetailsCollection = client.db('full-stack-project-1').collection('Category-details')
